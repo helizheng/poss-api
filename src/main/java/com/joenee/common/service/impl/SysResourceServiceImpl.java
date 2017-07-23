@@ -46,7 +46,7 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
         } catch (Exception e) {
             log.error(e.getMessage(),e);
             resd.setSuccess(false);
-            resd.setMsg(PossErrorEnum.REQUEST_EXCEPTION.getMessage());
+            resd.setMsg(PossErrorEnum._SYS_ERROR.getMessage());
         }
         return resd;
     }
@@ -64,7 +64,7 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
         } catch (Exception e) {
             LoggerUtil.log.error(e.getMessage(),e);
             resd.setSuccess(false);
-            resd.setMsg(PossErrorEnum.HANDLE_EXCEPTION.getMessage());
+            resd.setMsg(PossErrorEnum._SYS_ERROR.getMessage());
         }
         return resd;
     }
@@ -82,7 +82,7 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
         } catch (Exception e) {
             LoggerUtil.log.error(e.getMessage(),e);
             resd.setSuccess(false);
-            resd.setMsg(PossErrorEnum.HANDLE_EXCEPTION.getMessage());
+            resd.setMsg(PossErrorEnum._SYS_ERROR.getMessage());
         }
         return resd;
     }
@@ -100,7 +100,7 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
         } catch (Exception e) {
             LoggerUtil.log.error(e.getMessage(),e);
             resd.setSuccess(false);
-            resd.setMsg(PossErrorEnum.HANDLE_EXCEPTION.getMessage());
+            resd.setMsg(PossErrorEnum._SYS_ERROR.getMessage());
         }
         return resd;
     }
@@ -119,7 +119,7 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
         } catch (Exception e) {
             LoggerUtil.log.error(e.getMessage(),e);
             resd.setSuccess(false);
-            resd.setMsg(PossErrorEnum.REQUEST_EXCEPTION.getMessage());
+            resd.setMsg(PossErrorEnum._SYS_ERROR.getMessage());
         }
         return resd;
     }
@@ -138,7 +138,7 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
         } catch (Exception e) {
             LoggerUtil.log.error(e.getMessage(),e);
             resd.setSuccess(false);
-            resd.setMsg(PossErrorEnum.REQUEST_EXCEPTION.getMessage());
+            resd.setMsg(PossErrorEnum._SYS_ERROR.getMessage());
         }
         return resd;
     }
@@ -157,7 +157,7 @@ public class SysResourceServiceImpl extends ServiceImpl<SysResourceMapper, SysRe
         } catch (Exception e) {
             LoggerUtil.log.error(e.getMessage(),e);
             resd.setSuccess(false);
-            resd.setMsg(PossErrorEnum.REQUEST_EXCEPTION.getMessage());
+            resd.setMsg(PossErrorEnum._SYS_ERROR.getMessage());
         }
         return resd;
     }

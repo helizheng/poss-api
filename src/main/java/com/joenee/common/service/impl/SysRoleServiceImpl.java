@@ -56,7 +56,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         } catch (Exception e) {
             LoggerUtil.log.error(e.getMessage(),e);
             resd.setSuccess(false);
-            resd.setMsg(PossErrorEnum.REQUEST_EXCEPTION.getMessage());
+            resd.setMsg(PossErrorEnum._SYS_ERROR.getMessage());
         }
         return resd;
     }
@@ -75,7 +75,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         } catch (Exception e) {
             LoggerUtil.log.error(e.getMessage(),e);
             resd.setSuccess(false);
-            resd.setMsg(PossErrorEnum.HANDLE_EXCEPTION.getMessage());
+            resd.setMsg(PossErrorEnum._SYS_ERROR.getMessage());
         }
         return resd;
     }
@@ -93,7 +93,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         } catch (Exception e) {
             LoggerUtil.log.error(e.getMessage(),e);
             resd.setSuccess(false);
-            resd.setMsg(PossErrorEnum.HANDLE_EXCEPTION.getMessage());
+            resd.setMsg(PossErrorEnum._SYS_ERROR.getMessage());
         }
         return resd;
     }
@@ -111,7 +111,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         } catch (Exception e) {
             LoggerUtil.log.error(e.getMessage(),e);
             resd.setSuccess(false);
-            resd.setMsg(PossErrorEnum.HANDLE_EXCEPTION.getMessage());
+            resd.setMsg(PossErrorEnum._SYS_ERROR.getMessage());
         }
         return resd;
     }
@@ -145,7 +145,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         } catch (Exception e) {
             LoggerUtil.log.error(e.getMessage(),e);
             resd.setSuccess(false);
-            resd.setMsg(PossErrorEnum.HANDLE_EXCEPTION.getMessage());
+            resd.setMsg(PossErrorEnum._SYS_ERROR.getMessage());
         }
         return resd;
     }

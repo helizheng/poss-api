@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.joenee.common.mapper.SysUserMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, name, age
+	</sql>
+
+	<!--根据用户名称查询该用户角色-->
+	<select id="queryUserRoleByName" parameterType="java.lang.String" resultType="com.joenee.common.model.SysRole">
+		SELECT
+		s_role.id,
+		s_role.NAME,
+		s_role.description,
+		s_role.`status`
+		FROM
+		sys_user s_user,
+		sys_user_role u_role,
+		sys_role s_role
+		WHERE
+		s_user.id = u_role.user_id
+		AND u_role.role_id = s_role.id
+		AND s_role.STATUS = 1
+		AND s_user.account_name = #{userName}
+	</select>
+
+	<!--根据用户ID查询该用户角色-->
+	<select id="queryUserRoleById" parameterType="java.lang.Integer" resultType="com.joenee.common.model.SysRole">
+		SELECT
+		s_role.id,
+		s_role.NAME,
+		s_role.description,
+		s_role.`status`
+		FROM
+		sys_user s_user,
+		sys_user_role u_role,
+		sys_role s_role
+		WHERE
+		s_user.id = u_role.user_id
+		AND u_role.role_id = s_role.id
+		AND s_role.STATUS = 1
+		AND s_user.id = #{userId}
+	</select>
+
+	<!--用户未拥有的角色-->
+	<select id="queryNotSelectRoleById" parameterType="com.joenee.common.model.SysUser" resultType="com.joenee.common.model.SysRole">
+		SELECT
+		DISTINCT s_role.id,
+		s_role.NAME,
+		s_role.description,
+		s_role.`status`
+		FROM
+		sys_role s_role
+		WHERE
+		s_role.STATUS = 1
+		<if test="list !=null and list.size >0">
+			AND s_role.id not in
+			<foreach collection="list" item="id" index="index"
+					 open="(" close=")" separator=",">
+				#{id}
+			</foreach>
+		</if>
+	</select>
+
+	<!--根据用户名称查询该用户权限菜单-->
+	<select id="queryUserResourceByName" parameterType="java.lang.String" resultType="com.joenee.common.model.SysResource">
+		SELECT
+		DISTINCT s_res.id,
+		s_res.`name`,
+		s_res.parent_id parentId,
+		s_res.res_key resKey,
+		s_res.res_url resUrl,
+		s_res.type,
+		s_res.permission,
+		s_res.`level`,
+		s_res.status,
+		s_res.icon,
+		s_res.description
+		FROM
+		sys_user s_user,
+		sys_user_role u_role,
+		sys_role_resource r_res,
+		sys_resource s_res
+		WHERE
+		s_user.id = u_role.user_id
+		AND u_role.role_id = r_res.role_id
+		AND r_res.resource_id = s_res.id
+		AND s_user.account_name = #{userName}
+		AND s_res.status = 1
+		AND s_res.type = 1
+	</select>
+
+	<!--根据用户ID查询该用户权限菜单-->
+	<select id="queryUserResourceById" parameterType="java.lang.Integer" resultType="com.joenee.common.util.TreeObject">
+		SELECT
+		DISTINCT s_res.id,
+		s_res.`name`,
+		s_res.parent_id parentId,
+		s_res.res_key resKey,
+		s_res.res_url resUrl,
+		s_res.type,
+		s_res.permission,
+		s_res.`level`,
+		s_res.status,
+		s_res.icon,
+		s_res.description
+		FROM
+		sys_user s_user,
+		sys_user_role u_role,
+		sys_role_resource r_res,
+		sys_resource s_res
+		WHERE
+		s_user.id = u_role.user_id
+		AND u_role.role_id = r_res.role_id
+		AND r_res.resource_id = s_res.id
+		AND s_user.id = #{userId}
+		AND s_res.status = 1
+	</select>
+
+
+	<!--根据角色ID查询该角色权限菜单-->
+	<select id="queryRoleResourceById" parameterType="java.lang.Integer" resultType="com.joenee.common.util.TreeObject">
+		SELECT
+		s_res.id,
+		s_res.`name`,
+		s_res.parent_id parentId,
+		s_res.res_key resKey,
+		s_res.res_url resUrl,
+		s_res.type,
+		s_res.permission,
+		s_res.`level`,
+		s_res.status,
+		s_res.icon,
+		s_res.description
+		FROM
+		sys_role s_role,
+		sys_role_resource r_res,
+		sys_resource s_res
+		WHERE
+		s_role.id=r_res.role_id
+		AND r_res.resource_id = s_res.id
+		AND s_role.id = #{roleId}
+		AND s_res.status = 1
+	</select>
+
+	<!--查询资源列表-->
+	<select id="queryResource" resultType="com.joenee.common.util.TreeObject" parameterType="com.joenee.common.model.SysResource">
+		SELECT
+		ID,RES_URL resUrl,PARENT_ID parentId,ICON,LEVEL,
+		RES_KEY resKey,DESCRIPTION,NAME,PERMISSION,TYPE,
+		status
+		FROM SYS_RESOURCE
+		<where>
+			<if test="id != null">
+				ID = #{id}
+			</if>
+			<if test="resUrl != null and resUrl != ''">
+				RES_URL = #{resUrl}
+			</if>
+			<if test="parentId != null">
+				PARENT_ID = #{parentId}
+			</if>
+			<if test="icon != null and icon != ''">
+				ICON = #{icon}
+			</if>
+			<if test="level != null">
+				LEVEL = #{level}
+			</if>
+			<if test="resKey != null and resKey != ''">
+				RES_KEY = #{resKey}
+			</if>
+			<if test="description != null and description != ''">
+				DESCRIPTION = #{description}
+			</if>
+			<if test="name != null and name != ''">
+				NAME like "%"#{name}"%"
+			</if>
+			<if test="permission != null and permission != ''">
+				PERMISSION = #{permission}
+			</if>
+			<if test="type != null">
+				TYPE = #{type}
+			</if>
+			<if test="status != null">
+				status = #{status}
+			</if>
+		</where>
+	</select>
+
+	<!--根据角色ID查询该角色权限菜单-->
+	<select id="queryRoleResourceById" parameterType="java.lang.Integer" resultType="com.joenee.common.util.TreeObject">
+		SELECT
+		s_res.id,
+		s_res.`name`,
+		s_res.parent_id parentId,
+		s_res.res_key resKey,
+		s_res.res_url resUrl,
+		s_res.type,
+		s_res.permission,
+		s_res.`level`,
+		s_res.status,
+		s_res.icon,
+		s_res.description
+		FROM
+		sys_role s_role,
+		sys_role_resource r_res,
+		sys_resource s_res
+		WHERE
+		s_role.id=r_res.role_id
+		AND r_res.resource_id = s_res.id
+		AND s_role.id = #{roleId}
+		AND s_res.status = 1
+	</select>
+</mapper>
